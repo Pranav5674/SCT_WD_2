@@ -1,0 +1,245 @@
+/* =============================================
+   CALCULATOR.CSS — Industrial Brutalist Theme
+   ============================================= */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --bg:          #0d0d0d;
+  --surface:     #141414;
+  --panel:       #1a1a1a;
+  --border:      #2e2e2e;
+  --accent:      #e8ff00;        /* electric yellow-green */
+  --accent-dim:  #9aaa00;
+  --op-bg:       #222;
+  --op-active:   #e8ff00;
+  --num-bg:      #1c1c1c;
+  --num-hover:   #272727;
+  --func-bg:     #252525;
+  --func-hover:  #333;
+  --eq-bg:       #e8ff00;
+  --eq-hover:    #fff176;
+  --text-main:   #f0f0f0;
+  --text-dim:    #555;
+  --text-expr:   #888;
+  --text-eq:     #0d0d0d;
+  --font-display: 'Share Tech Mono', monospace;
+  --font-label:   'Bebas Neue', sans-serif;
+  --radius:       4px;
+  --shadow:       0 0 0 1px var(--border);
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+
+  /* subtle grid texture */
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ---------- Wrapper ---------- */
+.calc-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.calc-label {
+  font-family: var(--font-label);
+  font-size: 13px;
+  letter-spacing: 6px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  align-self: flex-start;
+  padding-left: 2px;
+}
+
+.keyboard-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+
+/* ---------- Calculator Shell ---------- */
+.calculator {
+  width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(232,255,0,.04),
+    0 24px 80px rgba(0,0,0,.7),
+    inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+/* ---------- Display ---------- */
+.display-panel {
+  background: var(--panel);
+  padding: 20px 22px 18px;
+  border-bottom: 1px solid var(--border);
+  min-height: 116px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.display-expression {
+  font-size: 13px;
+  color: var(--text-expr);
+  text-align: right;
+  min-height: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.display-result {
+  font-size: 44px;
+  color: var(--text-main);
+  text-align: right;
+  line-height: 1;
+  letter-spacing: -1px;
+  transition: font-size .1s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.display-result.shrink   { font-size: 30px; }
+.display-result.shrink-2 { font-size: 22px; }
+
+.display-status {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  text-align: right;
+  min-height: 16px;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+.display-status.error {
+  color: #ff4040;
+}
+
+/* ---------- Button Grid ---------- */
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);   /* gap colour via bg trick */
+  padding: 1px;
+}
+
+/* ---------- Base Button ---------- */
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 1px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background .08s, color .08s, transform .06s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .08s;
+  background: rgba(255,255,255,.06);
+}
+.btn:hover::after { opacity: 1; }
+.btn:active       { transform: scale(.94); }
+
+/* ---------- Number Buttons ---------- */
+.btn-num {
+  background: var(--num-bg);
+  color: var(--text-main);
+}
+.btn-num:hover { background: var(--num-hover); }
+
+/* ---------- Function Buttons (AC, +/−, %) ---------- */
+.btn-func {
+  background: var(--func-bg);
+  color: #ccc;
+  font-size: 16px;
+}
+.btn-func:hover { background: var(--func-hover); }
+
+/* ---------- Operator Buttons ---------- */
+.btn-op {
+  background: var(--op-bg);
+  color: var(--accent);
+  font-size: 22px;
+}
+.btn-op:hover        { background: #2a2a00; }
+.btn-op.active-op    {
+  background: var(--accent);
+  color: var(--text-eq);
+}
+
+/* ---------- Equals Button ---------- */
+.btn-eq {
+  background: var(--eq-bg);
+  color: var(--text-eq);
+  font-size: 24px;
+  grid-column: span 1;
+}
+.btn-eq:hover { background: var(--eq-hover); }
+
+/* ---------- Zero Button (wide) ---------- */
+.btn-zero {
+  grid-column: span 2;
+  justify-content: flex-start;
+  padding-left: 26px;
+}
+
+/* ---------- Press Flash Animation ---------- */
+@keyframes flash {
+  0%   { background: var(--accent); color: #000; }
+  100% { background: inherit;       color: inherit; }
+}
+.btn.flash { animation: flash .18s ease-out; }
+
+/* ---------- Error Shake ---------- */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-6px); }
+  40%     { transform: translateX(6px); }
+  60%     { transform: translateX(-4px); }
+  80%     { transform: translateX(4px); }
+}
+.calculator.shake { animation: shake .3s ease; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 380px) {
+  .calculator  { width: 100vw; border-radius: 0; border-left: none; border-right: none; }
+  .btn         { height: 64px; }
+}

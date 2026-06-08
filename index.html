@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="calc-wrapper">
+    <div class="calc-label">CALC — 01</div>
+
+    <div class="calculator" id="calculator">
+
+      <!-- Display -->
+      <div class="display-panel">
+        <div class="display-expression" id="expression">&nbsp;</div>
+        <div class="display-result" id="result">0</div>
+        <div class="display-status" id="status">&nbsp;</div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="btn-grid">
+        <!-- Row 1 -->
+        <button class="btn btn-func" data-action="clear">AC</button>
+        <button class="btn btn-func" data-action="sign">+/−</button>
+        <button class="btn btn-func" data-action="percent">%</button>
+        <button class="btn btn-op"   data-action="operator" data-value="/">÷</button>
+
+        <!-- Row 2 -->
+        <button class="btn btn-num" data-action="digit" data-value="7">7</button>
+        <button class="btn btn-num" data-action="digit" data-value="8">8</button>
+        <button class="btn btn-num" data-action="digit" data-value="9">9</button>
+        <button class="btn btn-op"  data-action="operator" data-value="*">×</button>
+
+        <!-- Row 3 -->
+        <button class="btn btn-num" data-action="digit" data-value="4">4</button>
+        <button class="btn btn-num" data-action="digit" data-value="5">5</button>
+        <button class="btn btn-num" data-action="digit" data-value="6">6</button>
+        <button class="btn btn-op"  data-action="operator" data-value="-">−</button>
+
+        <!-- Row 4 -->
+        <button class="btn btn-num" data-action="digit" data-value="1">1</button>
+        <button class="btn btn-num" data-action="digit" data-value="2">2</button>
+        <button class="btn btn-num" data-action="digit" data-value="3">3</button>
+        <button class="btn btn-op"  data-action="operator" data-value="+">+</button>
+
+        <!-- Row 5 -->
+        <button class="btn btn-num btn-zero" data-action="digit" data-value="0">0</button>
+        <button class="btn btn-num" data-action="decimal">.</button>
+        <button class="btn btn-eq" data-action="equals">=</button>
+      </div>
+
+    </div>
+
+    <div class="keyboard-hint">↑ keyboard supported</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
